@@ -15,6 +15,7 @@ import { ToDo } from '../../../models/ToDo';
 
 export default function TodoList() {
   const [value, setValue] = React.useState<string>('');
+  const [rendersNumber, setRendersNumber] = React.useState<number>(0);
 
   const { addTodo, deleteTodo, data, completeTodo } = useToDo();
 
@@ -29,7 +30,7 @@ export default function TodoList() {
   };
 
   const list = React.useMemo(() => {
-    console.log('rendering grid ...');
+    setRendersNumber(prev => prev + 1);
     return (
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -84,6 +85,7 @@ export default function TodoList() {
         (note that grid also does not render while typing)
       </Box>
       <Box component="div" sx={{ marginTop: 2 }}>
+        <h3>Grid render number: {rendersNumber}</h3>
         {list}
       </Box>
     </>

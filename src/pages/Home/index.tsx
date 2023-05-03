@@ -1,11 +1,6 @@
 import React, { FC } from 'react';
 import TodoList from './components/TodoList';
 
-const Grid = () => {
-  console.log('rendeing ...');
-  return <table></table>;
-};
-
 const Home: FC = () => {
   const [state, setState] = React.useState(0);
 
