@@ -10,7 +10,7 @@ import {
   ListItemIcon,
   Divider,
 } from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 import { menu } from '../../../config/menu';
 import { Menu as AppMenu } from '../../../models/App/Menu';
@@ -54,7 +54,7 @@ const Sidebar: FC = () => {
               <ListItem key="logout" disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
-                    <HomeIcon />
+                    <LogoutIcon />
                   </ListItemIcon>
                   Logout
                 </ListItemButton>
