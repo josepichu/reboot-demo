@@ -6,6 +6,7 @@ interface TodoProviderI {
   addTodo: (name: string) => void;
   deleteTodo: (id: number) => void;
   completeTodo: (id: number) => void;
+  getTodoById: (id: number) => ToDo | undefined;
 }
 
 const initialValue: TodoProviderI = {
@@ -13,6 +14,7 @@ const initialValue: TodoProviderI = {
   addTodo: () => null,
   deleteTodo: () => null,
   completeTodo: () => null,
+  getTodoById: () => undefined,
 };
 
 const ToDoContext = React.createContext(initialValue);
@@ -70,6 +72,9 @@ const TodoProvider = ({ children }: { children: any }) => {
     dispatch({ type: 'complete-todo', payload: { id } });
   };
 
+  const getTodoById = (id: number): ToDo | undefined =>
+    state.data.find((todo: ToDo) => todo.id === id);
+
   return (
     <ToDoContext.Provider
       value={{
@@ -77,6 +82,7 @@ const TodoProvider = ({ children }: { children: any }) => {
         addTodo,
         deleteTodo,
         completeTodo,
+        getTodoById,
       }}
     >
       {children}

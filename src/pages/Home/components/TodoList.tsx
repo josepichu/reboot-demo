@@ -10,12 +10,16 @@ import { Box, Button, TextField } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import IconButton from '@mui/material/IconButton';
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import { useToDo } from '../../../context/TodoProvider';
 import { ToDo } from '../../../models/ToDo';
+import { useNavigate } from 'react-router-dom';
 
 export default function TodoList() {
   const [value, setValue] = React.useState<string>('');
   const [rendersNumber, setRendersNumber] = React.useState<number>(0);
+
+  const navigate = useNavigate();
 
   const { addTodo, deleteTodo, data, completeTodo } = useToDo();
 
@@ -25,8 +29,13 @@ export default function TodoList() {
       setValue('');
     }
   };
+
   const handleDeleteTask = (row: ToDo) => {
     deleteTodo(row.id);
+  };
+
+  const handleViewDetails = (row: ToDo) => {
+    navigate(`/details/${row.id}`);
   };
 
   const list = React.useMemo(() => {
@@ -57,6 +66,9 @@ export default function TodoList() {
                   />
                 </TableCell>
                 <TableCell align="right">
+                  <IconButton onClick={() => handleViewDetails(row)}>
+                    <ManageSearchIcon />
+                  </IconButton>
                   <IconButton onClick={() => handleDeleteTask(row)}>
                     <DeleteOutlineIcon />
                   </IconButton>
